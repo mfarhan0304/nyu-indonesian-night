@@ -35,10 +35,14 @@ export default function HauntingFolkloresBooth() {
         <h2 className="text-2xl font-semibold mb-4">Recommended Horror Movies</h2>
         <div className="flex overflow-x-auto space-x-4 pb-4">
           {recommendations.map((movie) => (
-            <div key={movie.title} className="flex-shrink-0 w-48">
-              <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover rounded-lg mb-2" />
-              <h3 className="text-lg font-semibold mb-2">{movie.title}</h3>
-              <Button asChild className="w-full">
+            <div key={movie.title} className="flex-shrink-0 w-48 flex flex-col">
+              <div className="relative">
+                <h3 className="absolute top-0 left-0 right-0 bg-black bg-opacity-70 text-white text-sm font-semibold p-2 line-clamp-2 h-16 flex items-center justify-center text-center">
+                  {movie.title}
+                </h3>
+                <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover rounded-lg" />
+              </div>
+              <Button asChild className="w-full mt-2">
                 <a href={movie.link} target="_blank" rel="noopener noreferrer">Watch Now</a>
               </Button>
             </div>
