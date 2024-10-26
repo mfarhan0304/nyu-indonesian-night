@@ -2,24 +2,23 @@
 
 import React, { useState, useEffect, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog"
-
-// Sample Indonesian words and their meanings
-const words = [
-  { word: 'SALAM', meaning: 'Greeting' },
-  { word: 'MAKAN', meaning: 'To eat' },
-  { word: 'TIDUR', meaning: 'To sleep' },
-  { word: 'BUKU', meaning: 'Book' },
-  { word: 'RUMAH', meaning: 'House' },
-]
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
 
 const WORD_LENGTH = 5
 const MAX_GUESSES = 6
 
 type GuessState = ('correct' | 'present' | 'absent' | 'empty')[]
 
+type Word = {
+  word: string;
+  meaning: string;
+  similarity: number;
+}
+
 const IndonesianWordle = () => {
+  const [words, setWords] = useState<Word[]>([])
   const [currentWord, setCurrentWord] = useState('')
   const [currentMeaning, setCurrentMeaning] = useState('')
   const [guesses, setGuesses] = useState<string[]>([])
@@ -28,24 +27,51 @@ const IndonesianWordle = () => {
   const [showOverlay, setShowOverlay] = useState(true)
   const [showWinDialog, setShowWinDialog] = useState(false)
   const [showLoseDialog, setShowLoseDialog] = useState(false)
+  const { toast } = useToast()
+
+  useEffect(() => {
+    fetch('/files/words.json')
+      .then(response => response.json())
+      .then(data => setWords(data))
+      .catch(error => console.error('Error fetching words:', error))
+  }, [])
 
   const newGame = useCallback(() => {
-    const randomIndex = Math.floor(Math.random() * words.length)
-    setCurrentWord(words[randomIndex].word)
-    setCurrentMeaning(words[randomIndex].meaning)
+    if (words.length === 0) return
+    let randomIndex = Math.floor(Math.random() * words.length)
+    while (words[randomIndex].similarity == 1) {
+      randomIndex = Math.floor(Math.random() * words.length)
+    }
+
+    setCurrentWord(words[randomIndex].word.toUpperCase())
+    setCurrentMeaning(words[randomIndex].meaning.toLowerCase())
     setGuesses([])
     setCurrentGuess('')
     setGameOver(false)
     setShowWinDialog(false)
     setShowLoseDialog(false)
-  }, [])
+  }, [words])
 
   useEffect(() => {
-    newGame()
-  }, [newGame])
+    if (words.length > 0) {
+      newGame()
+    }
+  }, [words, newGame])
+
+  const showToastMessage = (message: string) => {
+    toast({
+      description: message,
+      duration: 1000,
+    })
+  }
 
   const onGuess = useCallback(() => {
     if (currentGuess.length !== WORD_LENGTH) return
+
+    if (!words.some(word => word.word.toUpperCase() === currentGuess.toUpperCase())) {
+      showToastMessage('Invalid word')
+      return
+    }
 
     const newGuesses = [...guesses, currentGuess.toUpperCase()]
     setGuesses(newGuesses)
@@ -58,7 +84,7 @@ const IndonesianWordle = () => {
       setShowLoseDialog(true)
       setGameOver(true)
     }
-  }, [currentGuess, currentWord, guesses])
+  }, [currentGuess, currentWord, guesses, words, showToastMessage])
 
   const getGuessState = useCallback((guess: string): GuessState => {
     const result: GuessState = Array(WORD_LENGTH).fill('absent')
@@ -97,7 +123,7 @@ const IndonesianWordle = () => {
     } else if (currentGuess.length < WORD_LENGTH && /^[A-Z]$/.test(key)) {
       setCurrentGuess(prev => prev + key)
     }
-  }, [currentGuess, gameOver, onGuess, WORD_LENGTH])
+  }, [currentGuess, gameOver, onGuess])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -125,11 +151,10 @@ const IndonesianWordle = () => {
             <div
               key={j}
               className={`w-12 h-12 border-2 flex items-center justify-center mx-1 text-xl font-bold
-              ${i < guesses.length ? (
-                guessState[j] === 'correct' ? 'bg-green-500 text-white' :
+              ${guessState[j] === 'correct' ? 'bg-green-500 text-white' :
                 guessState[j] === 'present' ? 'bg-yellow-500 text-white' :
-                guessState[j] === 'absent' ? 'bg-gray-500 text-white' : 'bg-white'
-              ) : 'bg-white'}`}
+                guessState[j] === 'absent' ? 'bg-gray-500 text-white' :
+                'bg-white'}`}
             >
               {guess[j] || ''}
             </div>
@@ -174,62 +199,77 @@ const IndonesianWordle = () => {
   }
 
   return (
-    <Card className="w-full max-w-2xl mx-auto mt-8">
-      <CardHeader>
-        <CardTitle>Bahasa & Beyond: Indonesian Wordle</CardTitle>
-        <CardDescription>Guess the Indonesian word based on its meaning</CardDescription>
-      </CardHeader>
-      <CardContent>
-        {showOverlay ? (
-          <div className="absolute inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
-            <div className="text-center text-white">
-              <h2 className="text-2xl font-bold mb-4">Wanna try to guess a word?</h2>
-              <Button onClick={() => setShowOverlay(false)}>Start Game</Button>
-            </div>
+    <div className="w-full mx-auto mt-8">
+      {showOverlay ? (
+        <div className="bg-gray-800 bg-opacity-75 flex items-center justify-center" style={{ width: '100%', height: '400px' }}>
+          <div className="text-center text-white">
+            <h2 className="text-2xl font-bold mb-4">Wanna try to guess a word?</h2>
+            <Button onClick={() => {
+              setShowOverlay(false);
+              setGameOver(false);
+              newGame();
+            }}>Start Game
+            </Button>
           </div>
-        ) : (
-          <>
-            <div className="text-center mb-4">
-              <h2 className="text-xl font-bold">Meaning: {currentMeaning}</h2>
-            </div>
-            <div className="mb-4">
-              {renderGrid()}
-            </div>
-            {renderKeyboard()}
-          </>
-        )}
+        </div>
+      ) : (
+        <div className="relative">
+          <div className="text-center mb-4">
+            <h2 className="text-xl font-bold">Meaning: {currentMeaning}</h2>
+          </div>
+          <div className="mb-4">
+            {renderGrid()}
+          </div>
+          {renderKeyboard()}
+        </div>
+      )}
 
-        <Dialog open={showWinDialog} onOpenChange={setShowWinDialog}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Congratulations!</DialogTitle>
-              <DialogDescription>
-                {/* eslint-disable-next-line react/no-unescaped-entities */}
-                You've guessed the word correctly. Cool!
-              </DialogDescription>
-            </DialogHeader>
-            <DialogClose asChild>
-              <Button onClick={newGame}>Play Again</Button>
-            </DialogClose>
-          </DialogContent>
-        </Dialog>
+      <Dialog open={showWinDialog} onOpenChange={setShowWinDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Congratulations!</DialogTitle>
+            <DialogDescription>
+              You&apos;ve guessed the word correctly. Cool!
+            </DialogDescription>
+          </DialogHeader>
+          <DialogClose asChild>
+            <Button onClick={newGame}>Play Again</Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button onClick={() => {
+              setShowWinDialog(false);
+              setShowOverlay(true);
+              setGameOver(true);
+            }}>I&apos;m done</Button>
+          </DialogClose>
+        </DialogContent>
+      </Dialog>
 
-        <Dialog open={showLoseDialog} onOpenChange={setShowLoseDialog}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Oh no!</DialogTitle>
-              <DialogDescription>
-                The word was {currentWord}. Bet you wanna win this game. Play again?
-              </DialogDescription>
-            </DialogHeader>
-            <DialogClose asChild>
-              <Button onClick={newGame}>Play Again</Button>
-            </DialogClose>
-          </DialogContent>
-        </Dialog>
-      </CardContent>
-    </Card>
+      <Dialog open={showLoseDialog} onOpenChange={setShowLoseDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Oh no!</DialogTitle>
+            <DialogDescription>
+              The word was {currentWord}. Bet you wanna win this game. Play again?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogClose asChild>
+            <Button onClick={newGame}>Play Again</Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button onClick={() => {
+              setShowLoseDialog(false);
+              setShowOverlay(true);
+              setGameOver(true);
+            }}>I&apos;m done</Button>
+          </DialogClose>
+        </DialogContent>
+      </Dialog>
+
+      <Toaster />
+    </div>
   )
 }
+
 
 export default IndonesianWordle

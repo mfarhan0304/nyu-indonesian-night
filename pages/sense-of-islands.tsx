@@ -15,7 +15,7 @@ export default function SenseOfIslandsBooth() {
     <DefaultBooth
       title="Sense of Islands"
       description="Indulge in Indonesia's sensory delights"
-      image="/placeholder.svg?height=300&width=450&text=Sense+of+Islands"
+      image="/images/sense-of-islands-details.png"
     >
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         {senses.map((sense, index) => (

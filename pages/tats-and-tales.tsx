@@ -26,7 +26,7 @@ export default function TatsAndTalesBooth() {
     <DefaultBooth
       title="Tats & Tales"
       description="Discover your name in traditional Indonesian scripts"
-      image="/placeholder.svg?height=300&width=450&text=Tats+&+Tales"
+      image="/images/tats-and-tails-details.png"
     >
       <div className="mt-4">
         <h2 className="text-xl sm:text-2xl font-semibold mb-2">Convert to Javanese Script</h2>

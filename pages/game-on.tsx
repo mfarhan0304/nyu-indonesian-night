@@ -1,33 +1,55 @@
-import React from 'react'
 import DefaultBooth from '@/components/default-booth'
 import { Button } from "@/components/ui/button"
 
 export default function GameOnBooth() {
   const games = [
-    { name: "Congklak", description: "Traditional board game of strategy" },
-    { name: "Gobak Sodor", description: "Team game of agility and strategy" },
-    { name: "Engklek", description: "Hopscotch-like game of balance and aim" }
+    {
+      name: "Congklak",
+      description: "A traditional board game played throughout Indonesia",
+      link: "https://mancala.playdrift.com",
+    },
+    {
+      name: "Gasing",
+      description: "The gasing is a top made from bamboo with a small opening on the side",
+      videoUrl: "https://www.youtube.com/watch?v=jcwNyUgzo_o",
+    },
+    {
+      name: "Gobak Sodor",
+      description: "A traditional Indonesian game of tag played between two teams",
+      videoUrl: "https://www.youtube.com/watch?v=o0tPTGtCbq4",
+    },
   ]
 
   return (
     <DefaultBooth
-      title="Game ON! Nusantara"
-      description="Engage in classic Indonesian games"
-      image="/placeholder.svg?height=300&width=450&text=Game+ON!+Nusantara"
+      title="Game On!"
+      description="Experience traditional Indonesian games"
+      image="/images/game-on-details.png"
     >
-      <div className="mt-4">
-        <h2 className="text-xl sm:text-2xl font-semibold mb-2">Traditional Games</h2>
-        <ul className="space-y-4">
-          {games.map((game, index) => (
-            <li key={index} className="flex justify-between items-center">
-              <div>
-                <h3 className="font-semibold">{game.name}</h3>
-                <p className="text-sm">{game.description}</p>
-              </div>
-              <Button>Play</Button>
-            </li>
-          ))}
-        </ul>
+      <div className="space-y-8 mt-8">
+        {games.map((game) => (
+          <div key={game.name} className="flex flex-row md:flex-row gap-4 items-center">
+            <div className="md:w-1/2">
+              <h3 className="text-xl font-semibold mb-2">{game.name}</h3>
+              <p className="mb-4">{game.description}</p>
+              {game.link && (
+                <Button asChild>
+                  <a href={game.link} target="_blank" rel="noopener noreferrer">Play {game.name}</a>
+                </Button>
+              )}
+              {game.videoUrl && (
+                <div>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${game.videoUrl.split('v=')[1]}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </DefaultBooth>
   )

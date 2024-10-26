@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from "next-themes"
 import BackgroundMusic from '@/components/background-music'
-import '@/styles/globals.css'
+import '@/app/globals.css'
+import { Toaster } from "@/components/ui/toaster"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
     >
       <Component {...pageProps} />
       <BackgroundMusic />
+      <Toaster />
     </ThemeProvider>
   )
 }

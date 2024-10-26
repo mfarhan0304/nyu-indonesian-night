@@ -38,7 +38,7 @@ export default function Home() {
                 </CardHeader>
                 <CardFooter className="p-0">
                   <Link href={`/${booth.id}`} passHref className="w-full">
-                    <Button className="w-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors">
+                    <Button className="w-full bg-white bg-opacity-30 hover:bg-opacity-30 transition-colors">
                       Explore
                     </Button>
                   </Link>
