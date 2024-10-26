@@ -67,7 +67,7 @@ export default function PrimbonCheckBooth() {
 
   const calculateWeton = (date: string[]): string | null => {
     // Calculate day of week
-    const daysOfWeek = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const javaDays = ["Pon", "Wage", "Kliwon", "Legi", "Pahing"];
     
     const monthRegex = /^(0*[1-9]|1[0-2])$/;
@@ -104,7 +104,7 @@ export default function PrimbonCheckBooth() {
     const javaDay = javaDays[totalFromAbove];
     const dayOfWeek = daysOfWeek[birthDate.getDay()];
 
-    return `${dayOfWeek} ${javaDay}`;
+    return `${javaDay} ${dayOfWeek}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
