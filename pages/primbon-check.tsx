@@ -46,7 +46,7 @@ export default function PrimbonCheckBooth() {
   const [result, setResult] = useState<WetonData | null>(null)
   const [error, setError] = useState("");
   const [date, setDate] = useState(["", "", ""]);
-  const inputRefs = [useRef(null), useRef(null), useRef(null)];
+  const inputRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   useEffect(() => {
     fetch('/files/weton.json')
@@ -61,7 +61,7 @@ export default function PrimbonCheckBooth() {
     setDate(newDate);
 
     if (value.length === 2 && index < 2) {
-      inputRefs[index + 1].current.focus();
+      inputRefs[index + 1]?.current?.focus();
     }
   };
 
@@ -132,7 +132,7 @@ export default function PrimbonCheckBooth() {
           <p className="mb-4">
             In Javanese belief, the meaning of an event occurring on a specific
             day can be predicted by examining a cycle of days in the traditional
-            calendar. This concept is based on "moco ing waskito," which means
+            calendar. This concept is based on &quot;moco ing waskito&quot;, which means
             reading events through observing natural phenomena or signs that
             have already occurred as a guide to understanding each future event.
             One example of this method of forecasting is found in the neptu
@@ -156,7 +156,7 @@ export default function PrimbonCheckBooth() {
           <p>
             Since ancient times, the Javanese neptu weton calculation system has
             been commonly used by Javanese society. It is not only used to
-            describe a person's traits, character, and destiny but also to
+            describe a person&apos;s traits, character, and destiny but also to
             determine planting and harvesting seasons, predict compatibility in
             marriage, and choose auspicious days for specific purposes.
           </p>
