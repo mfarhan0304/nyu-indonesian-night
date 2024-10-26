@@ -1,101 +1,53 @@
-import Image from "next/image";
+import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+
+const booths = [
+  { id: 'virtual-voyage', title: 'Virtual Voyage', description: 'Explore Indonesia\'s breathtaking scenery', image: '/images/virtual-voyage.webp' },
+  { id: 'woven-wonders', title: 'Woven Wonders', description: 'Slip into traditional Indonesian costumes', image: '/images/woven-wonders.webp' },
+  { id: 'sense-of-islands', title: 'Sense of Islands', description: 'Indulge in Indonesia\'s sensory delights', image: '/images/sense-of-islands.webp' },
+  { id: 'game-on', title: 'Game ON! Nusantara', description: 'Engage in classic Indonesian games', image: '/images/game-on.webp' },
+  { id: 'bahasa-beyond', title: 'Bahasa & Beyond', description: 'Master simple Indonesian phrases', image: '/images/bahasa-beyond.webp' },
+  { id: 'haunting-folklores', title: 'The Haunting Folklores', description: 'Encounter Indonesia\'s rich folklore and ghostly legends', image: '/images/haunting-folklores.webp' },
+  { id: 'tats-and-tales', title: 'Tats & Tales', description: 'Discover your name in traditional Indonesian scripts', image: '/images/tats-and-tales.webp' },
+  { id: 'primbon-check', title: 'Primbon & Khodam Check', description: 'Uncover the meaning of your birth date', image: '/images/primbon-check.webp' },
+]
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="container mx-auto py-8">
+      <h1 className="text-3xl font-bold mb-8 text-center">Indonesian Cultural Event Booths</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {booths.map((booth) => (
+          <Card key={booth.id} className="flex flex-col overflow-hidden group">
+            <div className="relative w-full h-[300px]">
+              <Image
+                src={booth.image}
+                alt={booth.title}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-40 transition-opacity group-hover:bg-opacity-30" />
+              <div className="absolute inset-0 flex flex-col justify-between p-4 text-white">
+                <CardHeader className="p-0">
+                  <CardTitle className="text-2xl font-bold mb-2">{booth.title}</CardTitle>
+                  <CardDescription className="text-sm text-gray-200">{booth.description}</CardDescription>
+                </CardHeader>
+                <CardFooter className="p-0">
+                  <Link href={`/${booth.id}`} passHref className="w-full">
+                    <Button className="w-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors">
+                      Explore
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
     </div>
-  );
+  )
 }
