@@ -44,6 +44,7 @@ export default function GameOnBooth() {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="w-full h-full"
+                    width="100%"
                   ></iframe>
                 </div>
               )}

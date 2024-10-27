@@ -8,10 +8,22 @@ export default function VirtualVoyageBooth() {
       image="/images/virtual-voyage-details.webp"
     >
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Experience Komodo Island in 360°</h2>
+        <h2 className="text-2xl font-semibold mb-4">Explore Indonesia</h2>
         <div className="aspect-w-16 aspect-h-9">
           <iframe
-            src="https://www.youtube.com/embed/osX-JP0ZL6g"
+            src="https://www.youtube.com/embed/5v6u_U6QRQA"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          ></iframe>
+        </div>
+      </div>
+
+      <div className="mt-8">
+        <h2 className="text-2xl font-semibold mb-4">Experience Komodo Island</h2>
+        <div className="aspect-w-16 aspect-h-9">
+          <iframe
+            src="https://www.youtube.com/embed/RaTWq98hzF0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-full"
