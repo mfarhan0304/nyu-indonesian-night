@@ -119,7 +119,7 @@ export default function PrimbonCheckBooth() {
     <DefaultBooth
       title="Primbon & Khodam Check"
       description="Discover your fortune through traditional Javanese numerology"
-      image="/placeholder.svg?height=300&width=450&text=Primbon+Check"
+      image="/images/primbon-check-details.webp"
     >
       <Card className="mb-8">
         <CardHeader>

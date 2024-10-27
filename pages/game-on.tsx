@@ -22,9 +22,9 @@ export default function GameOnBooth() {
 
   return (
     <DefaultBooth
-      title="Game On!"
+      title="Game ON! Nusantara"
       description="Experience traditional Indonesian games"
-      image="/images/game-on-details.png"
+      image="/images/game-on-details.webp"
     >
       <div className="space-y-8 mt-8">
         {games.map((game) => (

@@ -29,7 +29,7 @@ export default function HauntingFolkloresBooth() {
     <DefaultBooth
       title="Haunting Folklores"
       description="Explore the chilling world of Indonesian horror"
-      image="/placeholder.svg?height=300&width=450&text=Haunting+Folklores"
+      image="/images/haunting-folklores-details.webp"
     >
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">Recommended Horror Movies</h2>

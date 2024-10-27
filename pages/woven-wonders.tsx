@@ -6,7 +6,7 @@ export default function WovenWondersBooth() {
     <DefaultBooth
       title="Woven Wonders"
       description="Slip into traditional Indonesian costumes"
-      image="/images/woven-wonders-details.png"
+      image="/images/woven-wonders-details.webp"
     >
       <div className="mt-4">
         <h2 className="text-xl sm:text-2xl font-semibold mb-2">Explore Indonesian Textiles</h2>

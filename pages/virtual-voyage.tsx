@@ -5,7 +5,7 @@ export default function VirtualVoyageBooth() {
     <DefaultBooth
       title="Virtual Voyage"
       description="Embark on a virtual journey through Indonesia's diverse landscapes"
-      image="/images/virtual-voyage-details.png"
+      image="/images/virtual-voyage-details.webp"
     >
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">Experience Komodo Island in 360°</h2>
