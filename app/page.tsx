@@ -24,7 +24,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#F9F5E7] text-[#4A4A4A]">
       <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-[#A7727D] mb-4">Welcome to the Indonesian Cultural Event</h1>
+          <h1 className="text-4xl font-bold text-[#A7727D] mb-4">Welcome to This is Indonesia!</h1>
           <p className="text-xl mb-8">Explore the rich and diverse culture of Indonesia through our interactive booths</p>
         </div>
 
@@ -63,11 +63,6 @@ export default function Home() {
           ))}
         </div>
       </main>
-      <footer className="bg-[#A7727D] text-white py-4 mt-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2023 Indonesian Cultural Event. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   )
 }

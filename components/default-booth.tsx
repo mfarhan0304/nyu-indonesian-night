@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 interface DefaultBoothProps {
@@ -46,6 +47,14 @@ const DefaultBooth: React.FC<DefaultBoothProps> = ({ title, description, image, 
         </div>
         
         {children}
+
+        <Card className="mt-12 bg-[#A7727D] text-white">
+          <CardContent className="p-6">
+            <p className="text-lg font-semibold text-center">
+              Want to explore more? Come and ask our team at the booth!
+            </p>
+          </CardContent>
+        </Card>
       </main>
     </div>
   )

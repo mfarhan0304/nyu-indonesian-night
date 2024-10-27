@@ -24,7 +24,7 @@ export default function WovenWondersBooth() {
     <DefaultBooth
       title="Woven Wonders"
       description="Explore the rich tapestry of Indonesian traditional textiles"
-      image="/placeholder.svg?height=300&width=450&text=Woven+Wonders"
+      image="/woven-wonders-details.webp"
     >
       <div className="mt-8 space-y-8">
         <Card>
