@@ -29,10 +29,10 @@ export default function TatsAndTalesBooth() {
       image="/images/tats-and-tales-details.webp"
     >
       <div className="mt-4">
-        <h2 className="text-xl sm:text-2xl font-semibold mb-2">Convert to Javanese Script</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold mb-2">Convert Your Name to Hanacaraka!</h2>
         <div className="space-y-4">
           <div>
-            <label htmlFor="inputText" className="block text-sm font-medium text-gray-700 mb-1">Enter text:</label>
+            <label htmlFor="inputText" className="block text-sm font-medium text-gray-700 mb-1">Enter your name:</label>
             <Input
               id="inputText"
               value={inputText}
@@ -42,7 +42,7 @@ export default function TatsAndTalesBooth() {
             />
           </div>
           <div>
-            <label htmlFor="outputText" className="block text-sm font-medium text-gray-700 mb-1">Javanese script:</label>
+            <label htmlFor="outputText" className="block text-sm font-medium text-gray-700 mb-1">Your Javanese Name:</label>
             <div 
               id="outputText"
               className="w-full p-2 bg-gray-100 rounded-md min-h-[50px] text-2xl"

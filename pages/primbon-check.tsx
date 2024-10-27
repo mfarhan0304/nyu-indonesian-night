@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import DefaultBooth from "@/components/default-booth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/text-input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface WetonData {
   weton: string;
@@ -123,13 +123,10 @@ export default function PrimbonCheckBooth() {
     >
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Javanese Weton</CardTitle>
-          <CardDescription>
-            Understanding the significance of birth dates in Javanese culture
-          </CardDescription>
+          <CardTitle className="text-[#A7727D]">Javanese Weton</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="mb-4">
+          <p className="mb-2">
             In Javanese belief, the meaning of an event occurring on a specific
             day can be predicted by examining a cycle of days in the traditional
             calendar. This concept is based on &quot;moco ing waskito&quot;, which means
@@ -140,7 +137,7 @@ export default function PrimbonCheckBooth() {
             Javanese ancestors believed that the day a child is born influences
             their personality, character, and life path.
           </p>
-          <p className="mb-4">
+          <p className="mb-2">
             Rooted in philosophical foundations and the beliefs of Javanese
             society, there exists a theological background that leans toward
             mysticism and magic. Mysticism here refers to an effort to align
@@ -193,7 +190,7 @@ export default function PrimbonCheckBooth() {
                   className="w-24 text-center"
                 />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full mt-2 bg-[#A7727D] hover:bg-[#8B5D6B] text-white">
                 Check Your Weton
               </Button>
             </form>

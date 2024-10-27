@@ -33,7 +33,7 @@ export default function GameOnBooth() {
               <h3 className="text-xl font-semibold mb-2">{game.name}</h3>
               <p className="mb-4">{game.description}</p>
               {game.link && (
-                <Button asChild>
+                <Button asChild className="mt-2 bg-[#A7727D] hover:bg-[#8B5D6B] text-white">
                   <a href={game.link} target="_blank" rel="noopener noreferrer">Play {game.name}</a>
                 </Button>
               )}
