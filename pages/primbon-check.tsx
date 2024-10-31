@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import DefaultBooth from "@/components/default-booth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/text-input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface WetonData {
   weton: string;
@@ -42,18 +42,22 @@ const pasaranTable = [
 ];
 
 export default function PrimbonCheckBooth() {
-  const [wetonData, setWetonData] = useState<WetonData[]>([])
-  const [result, setResult] = useState<WetonData | null>(null)
+  const [wetonData, setWetonData] = useState<WetonData[]>([]);
+  const [result, setResult] = useState<WetonData | null>(null);
   const [error, setError] = useState("");
   const [date, setDate] = useState(["", "", ""]);
-  const inputRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   useEffect(() => {
-    fetch('/files/weton.json')
-      .then(response => response.json())
-      .then(data => setWetonData(data))
-      .catch(error => console.error('Error fetching weton data:', error))
-  }, [])
+    fetch("/files/weton.json")
+      .then((response) => response.json())
+      .then((data) => setWetonData(data))
+      .catch((error) => console.error("Error fetching weton data:", error));
+  }, []);
 
   const handleDateChange = (index: number, value: string) => {
     const newDate = [...date];
@@ -67,9 +71,17 @@ export default function PrimbonCheckBooth() {
 
   const calculateWeton = (date: string[]): string | null => {
     // Calculate day of week
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
     const javaDays = ["Pon", "Wage", "Kliwon", "Legi", "Pahing"];
-    
+
     const monthRegex = /^(0*[1-9]|1[0-2])$/;
     const dateRegex = /^(0*[1-9]|[12][0-9]|3[01])$/;
     const yearRegex = /^\d{4}$/;
@@ -111,8 +123,10 @@ export default function PrimbonCheckBooth() {
     e.preventDefault();
     setError("");
     const calculatedWeton = calculateWeton(date);
-    const matchedData = wetonData.find(data => data.weton === calculatedWeton)
-    setResult(matchedData || null)
+    const matchedData = wetonData.find(
+      (data) => data.weton === calculatedWeton
+    );
+    setResult(matchedData || null);
   };
 
   return (
@@ -123,19 +137,38 @@ export default function PrimbonCheckBooth() {
     >
       <Card className="mb-8">
         <CardHeader>
+          <CardTitle className="text-[#A7727D]">About Khodam</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-2">
+            Khodam is a spiritual entity in Indonesian mysticism, believed to be
+            a guardian or companion spirit. In some traditions, it&apos;s thought
+            that each person has a Khodam associated with them, influencing
+            their life and spiritual journey.
+          </p>
+          <p className="mb-2">
+            To learn more about your personal Khodam and its significance,
+            please visit our booth for a personalized consultation with our
+            spiritual experts.
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card className="mb-8">
+        <CardHeader>
           <CardTitle className="text-[#A7727D]">Javanese Weton</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="mb-2">
             In Javanese belief, the meaning of an event occurring on a specific
             day can be predicted by examining a cycle of days in the traditional
-            calendar. This concept is based on &quot;moco ing waskito&quot;, which means
-            reading events through observing natural phenomena or signs that
-            have already occurred as a guide to understanding each future event.
-            One example of this method of forecasting is found in the neptu
-            calculation system for Javanese birth days, known as Wetonan.
-            Javanese ancestors believed that the day a child is born influences
-            their personality, character, and life path.
+            calendar. This concept is based on &quot;moco ing waskito&quot;,
+            which means reading events through observing natural phenomena or
+            signs that have already occurred as a guide to understanding each
+            future event. One example of this method of forecasting is found in
+            the neptu calculation system for Javanese birth days, known as
+            Wetonan. Javanese ancestors believed that the day a child is born
+            influences their personality, character, and life path.
           </p>
           <p className="mb-2">
             Rooted in philosophical foundations and the beliefs of Javanese
@@ -190,30 +223,45 @@ export default function PrimbonCheckBooth() {
                   className="w-24 text-center"
                 />
               </div>
-              <Button type="submit" className="w-full mt-2 bg-[#A7727D] hover:bg-[#8B5D6B] text-white">
+              <Button
+                type="submit"
+                className="w-full mt-2 bg-[#A7727D] hover:bg-[#8B5D6B] text-white"
+              >
                 Check Your Weton
               </Button>
             </form>
-            
+
             {error && <div className="mt-4 text-red-600">{error}</div>}
           </div>
           {result && (
-              <div className="mt-8 space-y-4">
-                <p><b>{result.weton}</b></p>
-                <p><b>Dragon Day</b>: {result["naga-hari"]}</p>
-                <p><b>Good Hours</b>: {result["jam-baik"]}</p>
-                <p><b>Personality</b>:<br />{result["watak-kelahiran"]}</p>
-                <div>
-                  <p><b>Fate</b></p>
-                  {result["nasib-rezeki"].map((item, index) => (
-                    <p key={index}><b>{item["range-usia"]}</b>: {item.nasib}</p>
-                  ))}
-                </div>
+            <div className="mt-8 space-y-4">
+              <p>
+                <b>{result.weton}</b>
+              </p>
+              <p>
+                <b>Dragon Day</b>: {result["naga-hari"]}
+              </p>
+              <p>
+                <b>Good Hours</b>: {result["jam-baik"]}
+              </p>
+              <p>
+                <b>Personality</b>:<br />
+                {result["watak-kelahiran"]}
+              </p>
+              <div>
+                <p>
+                  <b>Fate</b>
+                </p>
+                {result["nasib-rezeki"].map((item, index) => (
+                  <p key={index}>
+                    <b>{item["range-usia"]}</b>: {item.nasib}
+                  </p>
+                ))}
               </div>
-            )}
+            </div>
+          )}
         </CardContent>
       </Card>
-
     </DefaultBooth>
   );
 }

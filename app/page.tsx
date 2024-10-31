@@ -54,7 +54,7 @@ export default function Home() {
                   </CardContent>
                   <CardFooter className="absolute bottom-0 left-0 right-0 z-20 p-4">
                     <Button className="w-full bg-[#A7727D] hover:bg-[#8B5D6B] text-white">
-                      Visit Booth
+                      Learn More
                     </Button>
                   </CardFooter>
                 </div>
